@@ -8,11 +8,7 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+<style lang="scss" scoped>
 .weather {
   @apply tw-flex tw-flex-col tw-font-Montserrat tw-bg-white;
 }
