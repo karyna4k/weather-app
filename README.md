@@ -1,6 +1,9 @@
-# vue-weather-widget
+# Weather-app
 
 This template should help get you started developing with Vue 3 in Vite.
+
+## Link to the finished project:
+https://karyna4k-weather-app.netlify.app
 
 ## Recommended IDE Setup
 
