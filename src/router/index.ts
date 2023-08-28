@@ -1,33 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SettingsView from '../views/SettingsView.vue';
-import WeatherView from '../views/WeatherView.vue';
+
+const loadComponent = (view: string) => {
+  return () => import(`@/views/${view}.vue`);
+};
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
-      path: '/:',
-      name: 'WeatherView',
-      component: WeatherView,
+      path: '/',
+      name: 'settings',
+      component: loadComponent('SettingsView'),
       meta: {
         title: 'Home'
       }
     },
+
     {
-      path: '/settings/',
-      name: 'settings',
-      component: SettingsView,
+      path: '/weather/',
+      name: 'weather',
+      component: loadComponent('WeatherView'),
       meta: {
-        title: 'Settings'
+        title: 'Weather'
       }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: loadComponent('NotFound')
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${
-    to.params.state ? `${to.params.city}, ${to.params.state}` : to.meta.title
-  } | The Weather`;
+  document.title = `${to.meta.title} | The Weather App`;
   next();
 });
 
