@@ -10,12 +10,16 @@
       <app-search />
 
       <div class="cities">
-        <city-card
-          v-for="city in store.cities"
-          :key="city.id"
-          :city="city"
-          @click="goToWeather(city.coords)"
-        />
+        <div v-if="store.loading" class="loading">Loading...</div>
+        <div v-if="store.error" class="error">{{ store.error }}</div>
+        <template v-if="store.cities">
+          <city-card
+            v-for="city in store.cities"
+            :key="city.id"
+            :city="city"
+            @click="goToWeather(city.coords)"
+          />
+        </template>
       </div>
     </div>
   </section>
