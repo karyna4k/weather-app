@@ -1,28 +1,28 @@
 <template>
   <li class="city">
-    <i class="fa-solid fa-bars city-dragging"></i>
     <h2 class="city-title">{{ `${city.city}, ${city.country}` }}</h2>
-    <button class="city-removing" type="button" @click.stop="$emit('remove', city)">
-      <i class="fa-solid fa-trash"></i>
+    <button class="city-removing" type="button" @click.stop="deleteCity(city.id)">
+      <span class="material-symbols-outlined"> delete </span>
     </button>
   </li>
 </template>
 
 <script setup lang="ts">
-import { type PropType } from 'vue';
-import type { CityLocation } from '@/models';
+import type { City } from '@/models';
+import { useCitiesStore } from '@/stores/cities';
 
-defineProps({
-  city: {
-    type: Object as PropType<CityLocation>,
-    required: true
-  }
-});
+type PropTypes = {
+  city: City;
+};
+
+const { deleteCity } = useCitiesStore();
+
+defineProps<PropTypes>();
 </script>
 
 <style lang="scss" scoped>
 .city {
-  @apply tw-flex tw-items-baseline tw-gap-3 tw-px-3 tw-py-4 tw-bg-gray-200 tw-cursor-pointer;
+  @apply tw-flex tw-items-baseline tw-gap-3 tw-px-6 tw-py-4 tw-bg-white tw-cursor-pointer tw-rounded-2xl;
   &-title {
     @apply tw-flex-1;
   }
