@@ -1,16 +1,12 @@
-export async function useGeolocation() {
-  return new Promise((resolve, reject) => {
-    if (!('geolocation' in navigator)) {
-      reject(new Error('Geolocation is not available.'));
-    }
+export function useGeolocation(callback: Function) {
+  !('geolocation' in navigator)
+    ? new Error('Geolocation is not available.')
+    : navigator.geolocation.getCurrentPosition((position) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        resolve(position);
-      },
-      (err) => {
-        reject(err);
-      }
-    );
-  });
+        callback(coords);
+      });
 }
