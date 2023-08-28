@@ -1,44 +1,66 @@
 import { defineStore } from 'pinia';
-import { ref, type Ref } from 'vue';
-import type { CityLocation, DataLocation, Nullable } from '@/models';
-import { useConvertData } from '@/composables';
+import { ref } from 'vue';
+import axios from 'axios';
+import { uid } from 'uid';
+import type { City, Coordinates } from '@/models';
+import { useGeolocation } from '@/composables';
 
 export const useCitiesStore = defineStore('cities', () => {
-  const savedCities: Ref<Array<CityLocation>> = ref([]);
-  const selectedCity: Ref<Nullable<CityLocation>> = ref(null);
-  const loading: Ref<boolean> = ref(false);
+  const cities = ref<City[]>([]);
+  const loading = ref(false);
   const error = ref(null);
 
-  // add city to the list
-  function addCity(city: DataLocation) {
-    if (localStorage.getItem('savedCities')) {
-      savedCities.value = JSON.parse(localStorage.getItem('savedCities'));
-    }
+  // init list of cities
+  const getCities = () => {
+    localStorage.getItem('cities')
+      ? (cities.value = JSON.parse(localStorage.getItem('cities')))
+      : useGeolocation(fetchCity);
+  };
 
-    if (
-      !savedCities.value.some(({ coords: { lat, lon } }) => lat === city.lat && lon === city.lon)
-    ) {
-      const location: CityLocation = useConvertData(city);
-      savedCities.value.push(location);
-      localStorage.setItem('savedCities', JSON.stringify(savedCities.value));
-    }
-  }
+  // add city to the list
+  const addCity = (city: City) => {
+    cities.value.push(city);
+    localStorage.setItem('cities', JSON.stringify(cities.value));
+  };
 
   // remove city from the list
-  function removeCity(city: CityLocation) {
-    const cities = savedCities.value.filter((item: CityLocation) => {
-      return item.id !== city.id;
-    });
-    savedCities.value = cities;
-    localStorage.setItem('savedCities', JSON.stringify(savedCities.value));
-  }
+  const deleteCity = (id: string) => {
+    cities.value = cities.value.filter((city: City) => city.id !== id);
+    localStorage.setItem('cities', JSON.stringify(cities.value));
+  };
+
+  const fetchCity = async (coords: Coordinates) => {
+    const apiKey = import.meta.env.VITE_WEATHER_KEY;
+    loading.value = true;
+
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${coords.lat}&lon=${coords.lon}&limit=5&appid=${apiKey}`
+      );
+      const city = await response.data[0];
+      cities.value.push({
+        id: uid(),
+        city: city.name,
+        country: city.country,
+        coords: {
+          lat: city.lat,
+          lon: city.lon
+        }
+      });
+      localStorage.setItem('cities', JSON.stringify(cities.value));
+    } catch (e) {
+      error.value = e;
+    } finally {
+      loading.value = false;
+    }
+  };
 
   return {
-    savedCities,
-    selectedCity,
+    cities,
     loading,
     error,
+    getCities,
     addCity,
-    removeCity
+    deleteCity
   };
 });
