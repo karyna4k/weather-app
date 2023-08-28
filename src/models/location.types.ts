@@ -3,14 +3,14 @@ export interface Coordinates {
   lon: number;
 }
 
-export interface CityLocation {
+export type City = {
   id: string;
   city: string;
   country: string;
   coords: Coordinates;
-}
+};
 
-export interface DataLocation {
+export interface GeocodedCity {
   name: string;
   local_names: {};
   lat: number;
