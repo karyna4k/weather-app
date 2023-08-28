@@ -1,54 +1,59 @@
 <template>
-  <div class="settings">
-    <div class="navigation">
-      <span class="navigation-title">Settings</span>
-      <router-link to="/">
-        <i class="fa-solid fa-xmark"></i>
-      </router-link>
+  <app-header>
+    <span class="tw-font-lg tw-font-semibold">Settings</span>
+    <div class="tw-cursor-pointer" @click="goBack">
+      <span class="material-symbols-outlined"> close </span>
     </div>
+  </app-header>
+  <section class="settings">
+    <div class="tw-container">
+      <app-search />
 
-    <div class="cities">
-      <city-list v-model="savedCities" :savedCities="savedCities" />
+      <div class="cities">
+        <city-card
+          v-for="city in store.cities"
+          :key="city.id"
+          :city="city"
+          @click="goToWeather(city.coords)"
+        />
+      </div>
     </div>
-
-    <app-search @add="addCityToList" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import type { DataLocation } from '@/models';
-import CityList from '@/components/CityList.vue';
-import AppSearch from '@/components/AppSearch.vue';
+import { defineAsyncComponent, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useCitiesStore } from '@/stores/cities';
-import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
+import type { Coordinates, Weather } from '@/models';
 
-const { savedCities, selectedCity } = storeToRefs(useCitiesStore());
-const { addCity } = useCitiesStore();
+const AppHeader = defineAsyncComponent(() => import('@/components/AppHeader.vue'));
+const AppSearch = defineAsyncComponent(() => import('@/components/AppSearch.vue'));
+const CityCard = defineAsyncComponent(() => import('@/components/CityCard.vue'));
 
-function addCityToList(city: DataLocation) {
-  addCity(city);
-}
+const store = useCitiesStore();
+
+const router = useRouter();
+
+const goBack = () => {
+  const weather: Weather = JSON.parse(localStorage.getItem('weather'));
+  router.push({ name: 'weather', query: { lat: weather.coord.lat, lon: weather.coord.lon } });
+};
+
+const goToWeather = (coords: Coordinates) => {
+  router.push({ name: 'weather', query: { lat: coords.lat, lon: coords.lon } });
+};
 
 onMounted(() => {
-  if (localStorage.getItem('savedCities')) {
-    savedCities.value = JSON.parse(localStorage.getItem('savedCities'));
-    selectedCity.value = JSON.parse(localStorage.getItem('selectedCity'));
-  }
+  store.getCities();
 });
 </script>
 
 <style lang="scss" scoped>
 .settings {
-  @apply tw-space-y-4;
+  @apply tw-min-h-screen tw-py-8 tw-bg-slate-200;
 }
-.navigation {
-  @apply tw-flex tw-justify-between tw-items-baseline tw-px-3 tw-py-4;
-  &-title {
-    @apply tw-font-medium;
-  }
-  i::before {
-    @apply tw-text-xl;
-  }
+.cities {
+  @apply tw-space-y-2;
 }
 </style>

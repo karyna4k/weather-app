@@ -1,37 +1,42 @@
 <template>
-  <p v-if="loading">loading...</p>
-  <p v-if="error">{{ error }}</p>
-  <div v-if="cityWeather" class="weather-wrapper">
-    <div class="navigation">
-      <p class="navigation-title">{{ cityWeather.name }}</p>
-      <router-link to="/settings">
-        <i class="fa-solid fa-gear"></i>
-      </router-link>
+  <app-header>
+    <router-link :to="{ name: 'settings' }" class="tw-text-lg tw-font-bold"
+      >Weather App</router-link
+    >
+    <router-link :to="{ name: 'settings' }">
+      <span class="material-symbols-outlined"> settings </span>
+    </router-link>
+  </app-header>
+  <section class="city-weather">
+    <div class="tw-container">
+      <div v-if="store.loading" class="loading">Loading...</div>
+      <div v-if="store.error" class="error">{{ store.error }}</div>
+      <city-weather v-if="store.weather" :weather="store.weather" />
     </div>
-
-    <city-weather :weather="cityWeather" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
+import { defineAsyncComponent, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import { useWeatherStore } from '@/stores/weather';
-import CityWeather from '@/components/CityWeather.vue';
 
-const { cityWeather, loading, error } = storeToRefs(useWeatherStore());
-const { fetchCityWeather } = useWeatherStore();
+const AppHeader = defineAsyncComponent(() => import('@/components/AppHeader.vue'));
+const CityWeather = defineAsyncComponent(() => import('@/components/CityWeather.vue'));
 
-fetchCityWeather();
+const route = useRoute();
+
+const store = useWeatherStore();
+
+onMounted(async () => {
+  const { lat, lon } = route.query;
+
+  store.fetchWeather(lat, lon);
+});
 </script>
 
 <style lang="scss" scoped>
-.navigation {
-  @apply tw-flex tw-justify-between tw-items-baseline tw-px-3 tw-py-4;
-  &-title {
-    @apply tw-font-medium;
-  }
-  i::before {
-    @apply tw-text-xl;
-  }
+.city-weather {
+  @apply tw-min-h-screen tw-py-8 tw-bg-slate-200;
 }
 </style>
