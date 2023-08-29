@@ -22,9 +22,11 @@
         </p>
         <template v-else>
           <li
-            v-for="result in searchResults"
+            v-for="result in isDisabled"
             :key="`${result.name},${result.country}`"
             class="results-item"
+            :class="{ disabled: result.disabled }"
+            :disabled="result.disabled"
             @click="addCity(result)"
           >
             {{ `${result.name}, ${result.state ? result.state + ',' : ''} ${result.country}` }}
@@ -36,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import axios from 'axios';
 import type { GeocodedCity, City } from '@/models';
 import { uid } from 'uid';
@@ -46,14 +48,23 @@ const store = useCitiesStore();
 
 const key = import.meta.env.VITE_WEATHER_KEY;
 
-const emits = defineEmits<{
-  (e: 'add-city', newCity: City): void;
-}>();
-
 const searchQuery = ref('');
 const queryTimeout = ref(null);
 const searchResults: Ref<Array<DataLocation> | null> = ref(null);
 const searchError = ref<boolean | null>(null);
+
+const isDisabled = computed(() => {
+  return searchResults.value.map((result: GeocodedCity) => {
+    if (
+      store.cities.some(
+        (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon
+      )
+    ) {
+      return { ...result, disabled: true };
+    }
+    return { ...result, disabled: false };
+  });
+});
 
 const getSearchResults = (): void => {
   clearTimeout(queryTimeout.value);
@@ -74,14 +85,14 @@ const getSearchResults = (): void => {
   }, 500);
 };
 
-const addCity = (city: GeocodedCity) => {
+const addCity = (cityResult: GeocodedCity) => {
   const newCity: City = {
     id: uid(),
-    city: city.name,
-    country: city.country,
+    city: cityResult.name,
+    country: cityResult.country,
     coords: {
-      lat: city.lat,
-      lon: city.lon
+      lat: cityResult.lat,
+      lon: cityResult.lon
     }
   };
   store.addCity(newCity);
@@ -91,7 +102,7 @@ const addCity = (city: GeocodedCity) => {
 
 <style lang="scss" scoped>
 .search {
-  @apply tw-space-y-2 tw-mb-8;
+  @apply tw-space-y-4 tw-mb-8;
   &-block {
     @apply tw-flex tw-flex-col tw-gap-2;
   }
@@ -104,10 +115,19 @@ const addCity = (city: GeocodedCity) => {
 }
 .results {
   &-list {
-    @apply tw-w-full tw-divide-y-2 tw-rounded-2xl tw-bg-slate-100;
+    @apply tw-w-full tw-divide-y-2 tw-rounded-2xl;
   }
   &-item {
-    @apply tw-py-3 tw-px-6 tw-cursor-pointer  hover:tw-font-semibold;
+    @apply tw-py-3 tw-px-6 tw-cursor-pointer tw-bg-slate-100 hover:tw-font-semibold;
+    &:first-child {
+      @apply tw-rounded-t-2xl;
+    }
+    &:last-child {
+      @apply tw-rounded-b-2xl;
+    }
+    &.disabled {
+      @apply tw-pointer-events-none tw-bg-white/20;
+    }
   }
   &-error,
   &-empty {
