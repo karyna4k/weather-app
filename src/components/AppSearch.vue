@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type Ref } from 'vue';
+import { computed, ref } from 'vue';
 import axios from 'axios';
 import type { GeocodedCity, City } from '@/models';
 import { uid } from 'uid';
@@ -49,12 +49,12 @@ const store = useCitiesStore();
 const key = import.meta.env.VITE_WEATHER_KEY;
 
 const searchQuery = ref('');
-const queryTimeout = ref(null);
-const searchResults: Ref<Array<DataLocation> | null> = ref(null);
+const queryTimeout = ref<NodeJS.Timeout | null>(null);
+const searchResults = ref<GeocodedCity[] | null>(null);
 const searchError = ref<boolean | null>(null);
 
 const isDisabled = computed(() => {
-  return searchResults.value.map((result: GeocodedCity) => {
+  return searchResults.value?.map((result: GeocodedCity) => {
     if (
       store.cities.some(
         (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon
@@ -67,7 +67,6 @@ const isDisabled = computed(() => {
 });
 
 const getSearchResults = (): void => {
-  clearTimeout(queryTimeout.value);
   queryTimeout.value = setTimeout(async (): Promise<void> => {
     if (searchQuery.value !== '') {
       try {
@@ -83,6 +82,8 @@ const getSearchResults = (): void => {
     }
     searchResults.value = null;
   }, 500);
+
+  clearTimeout(queryTimeout.value);
 };
 
 const addCity = (cityResult: GeocodedCity) => {

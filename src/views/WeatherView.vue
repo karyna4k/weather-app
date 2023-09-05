@@ -29,7 +29,9 @@ const store = useWeatherStore();
 onMounted(async () => {
   const { lat, lon } = route.query;
 
-  store.fetchWeather(lat, lon);
+  if (typeof lat === 'number' && typeof lon === 'number') {
+    store.fetchWeather(lat, lon);
+  }
 });
 </script>
 

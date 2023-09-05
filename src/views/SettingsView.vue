@@ -40,7 +40,7 @@ const store = useCitiesStore();
 const router = useRouter();
 
 const goBack = () => {
-  const weather: Weather = JSON.parse(localStorage.getItem('weather'));
+  const weather: Weather = JSON.parse(localStorage.getItem('weather') ?? '');
   router.push({ name: 'weather', query: { lat: weather.coord.lat, lon: weather.coord.lon } });
 };
 

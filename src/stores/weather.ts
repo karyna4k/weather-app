@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import type { Nullable, Weather, Direction, Coordinates } from '@/models';
-import type { LocationQueryValue } from 'vue-router';
+import type { Nullable, Weather, Direction } from '@/models';
+import { LocationQueryValue } from 'vue-router';
 
 export const useWeatherStore = defineStore('weather', () => {
   const weather = ref<Nullable<Weather>>(null);
@@ -18,7 +18,7 @@ export const useWeatherStore = defineStore('weather', () => {
         directions[0];
   });
 
-  const fetchWeather = async (lat, lon) => {
+  const fetchWeather = async (lat: LocationQueryValue, lon: LocationQueryValue) => {
     const apiKey = import.meta.env.VITE_WEATHER_KEY;
     loading.value = true;
 
@@ -29,7 +29,7 @@ export const useWeatherStore = defineStore('weather', () => {
       weather.value = await response.data;
       localStorage.setItem('weather', JSON.stringify(weather.value));
     } catch (e) {
-      error.value = e;
+      console.log(e);
     } finally {
       loading.value = false;
     }

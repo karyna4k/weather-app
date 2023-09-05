@@ -13,7 +13,7 @@ export const useCitiesStore = defineStore('cities', () => {
   // init list of cities
   const getCities = () => {
     localStorage.getItem('cities')
-      ? (cities.value = JSON.parse(localStorage.getItem('cities')))
+      ? (cities.value = JSON.parse(localStorage.getItem('cities') ?? ''))
       : useGeolocation(fetchCity);
   };
 
@@ -49,7 +49,7 @@ export const useCitiesStore = defineStore('cities', () => {
       });
       localStorage.setItem('cities', JSON.stringify(cities.value));
     } catch (e) {
-      error.value = e;
+      console.log(e);
     } finally {
       loading.value = false;
     }
