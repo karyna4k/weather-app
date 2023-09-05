@@ -6,8 +6,8 @@
 
 <script lang="ts" setup></script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .widget {
-  @apply flex flex-col bg-white;
+  @apply flex flex-col bg-primary text-dark;
 }
 </style>
