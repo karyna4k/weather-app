@@ -12,7 +12,15 @@ module.exports = {
         '2xl': '6rem'
       }
     },
-    extend: {}
+    extend: {
+      colors: {
+        dark: '#094067',
+        primary: '#fffffe',
+        secondary: '#90b4ce',
+        'accent-blue': '#3da9fc',
+        'accent-red': '#ef4565'
+      }
+    }
   },
   plugins: []
 };
