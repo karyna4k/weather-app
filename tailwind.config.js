@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: 'tw-',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,vue}'],
   theme: {
     container: {
@@ -13,10 +12,7 @@ module.exports = {
         '2xl': '6rem'
       }
     },
-    extend: {},
-    fontFamily: {
-      Montserrat: ['Montserrat, sans-serif']
-    }
+    extend: {}
   },
   plugins: []
 };
