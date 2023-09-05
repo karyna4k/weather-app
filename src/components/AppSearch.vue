@@ -102,36 +102,36 @@ const addCity = (cityResult: GeocodedCity) => {
 
 <style lang="scss" scoped>
 .search {
-  @apply tw-space-y-4 tw-mb-8;
+  @apply space-y-4 mb-8;
   &-block {
-    @apply tw-flex tw-flex-col tw-gap-2;
+    @apply flex flex-col gap-2;
   }
   &-label {
-    @apply tw-flex-1 tw-font-medium tw-ml-3;
+    @apply flex-1 font-medium ml-3;
   }
   &-field {
-    @apply tw-py-4 tw-px-6 tw-rounded-2xl focus:tw-border-gray-800 focus:tw-outline-none focus:tw-shadow-lg;
+    @apply py-4 px-6 rounded-2xl focus:border-gray-800 focus:outline-none focus:shadow-lg;
   }
 }
 .results {
   &-list {
-    @apply tw-w-full tw-divide-y-2 tw-rounded-2xl;
+    @apply w-full divide-y-2 rounded-2xl;
   }
   &-item {
-    @apply tw-py-3 tw-px-6 tw-cursor-pointer tw-bg-slate-100 hover:tw-font-semibold;
+    @apply py-3 px-6 cursor-pointer bg-slate-100 hover:font-semibold;
     &:first-child {
-      @apply tw-rounded-t-2xl;
+      @apply rounded-t-2xl;
     }
     &:last-child {
-      @apply tw-rounded-b-2xl;
+      @apply rounded-b-2xl;
     }
     &.disabled {
-      @apply tw-pointer-events-none tw-bg-white/20;
+      @apply pointer-events-none bg-white/20;
     }
   }
   &-error,
   &-empty {
-    @apply tw-py-4 tw-px-6 tw-text-center;
+    @apply py-4 px-6 text-center;
   }
 }
 </style>

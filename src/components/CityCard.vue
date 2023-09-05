@@ -22,9 +22,9 @@ defineProps<PropTypes>();
 
 <style lang="scss" scoped>
 .city {
-  @apply tw-flex tw-items-baseline tw-gap-3 tw-px-6 tw-py-4 tw-bg-white tw-cursor-pointer tw-rounded-2xl;
+  @apply flex items-baseline gap-3 px-6 py-4 bg-white cursor-pointer rounded-2xl;
   &-title {
-    @apply tw-flex-1;
+    @apply flex-1;
   }
 }
 </style>

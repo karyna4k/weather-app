@@ -1,14 +1,12 @@
 <template>
   <app-header>
-    <router-link :to="{ name: 'settings' }" class="tw-text-lg tw-font-bold"
-      >Weather App</router-link
-    >
+    <router-link :to="{ name: 'settings' }" class="text-lg font-bold">Weather App</router-link>
     <router-link :to="{ name: 'settings' }">
       <span class="material-symbols-outlined"> settings </span>
     </router-link>
   </app-header>
-  <section class="city-weather">
-    <div class="tw-container">
+  <section class="weather">
+    <div class="container">
       <div v-if="store.loading" class="loading">Loading...</div>
       <div v-if="store.error" class="error">{{ store.error }}</div>
       <city-weather v-if="store.weather" :weather="store.weather" />
@@ -36,7 +34,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.city-weather {
-  @apply tw-min-h-screen tw-py-8 tw-bg-slate-200;
+.weather {
+  @apply min-h-screen py-8 bg-slate-200;
 }
 </style>

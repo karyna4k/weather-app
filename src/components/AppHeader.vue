@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="tw-container">
+    <div class="container">
       <div class="navigation">
         <slot />
       </div>
@@ -10,11 +10,11 @@
 
 <script setup lang="ts"></script>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
-  @apply tw-bg-white;
+  @apply bg-white;
 }
 .navigation {
-  @apply tw-flex tw-justify-between tw-items-baseline tw-py-5;
+  @apply flex justify-between items-baseline py-5;
 }
 </style>

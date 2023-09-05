@@ -85,19 +85,19 @@ const { getWindDirection } = storeToRefs(useWeatherStore());
 <style lang="scss" scoped>
 .info {
   &-title {
-    @apply tw-text-center tw-text-2xl sm:tw-text-4xl tw-font-bold;
+    @apply text-center text-2xl sm:text-4xl font-bold;
   }
   &-main {
-    @apply tw-flex tw-justify-center tw-items-center tw-text-xl sm:tw-text-3xl tw-font-medium;
+    @apply flex justify-center items-center text-xl sm:text-3xl font-medium;
     img {
-      @apply tw-w-24;
+      @apply w-24;
     }
   }
   &-descr {
-    @apply tw-text-center tw-font-medium tw-text-lg sm:tw-text-xl;
+    @apply text-center font-medium text-lg sm:text-xl;
   }
   &-list {
-    @apply tw-grid tw-gap-4 tw-my-10;
+    @apply grid gap-4 my-10;
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     @screen md {
       grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
@@ -105,13 +105,13 @@ const { getWindDirection } = storeToRefs(useWeatherStore());
   }
 }
 .item {
-  @apply tw-flex tw-flex-col tw-gap-2 tw-pl-12 tw-pr-8 tw-py-4 tw-rounded-2xl tw-bg-white;
+  @apply flex flex-col gap-2 pl-12 pr-8 py-4 rounded-2xl bg-white;
   box-shadow: -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
   &-title {
-    @apply tw-flex tw-items-center tw-gap-2 tw-text-xs tw-font-medium;
+    @apply flex items-center gap-2 text-xs font-medium;
   }
   &-descr {
-    @apply tw-font-semibold tw-text-xl;
+    @apply font-semibold text-xl;
   }
 }
 </style>

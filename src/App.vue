@@ -8,6 +8,6 @@
 
 <style lang="scss" scoped>
 .weather {
-  @apply tw-flex tw-flex-col tw-font-Montserrat tw-bg-white;
+  @apply flex flex-col font-Montserrat bg-white;
 }
 </style>

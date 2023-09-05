@@ -1,12 +1,12 @@
 <template>
   <app-header>
-    <span class="tw-font-lg tw-font-semibold">Settings</span>
-    <div class="tw-cursor-pointer" @click="goBack">
+    <span class="font-lg font-semibold">Settings</span>
+    <div class="cursor-pointer" @click="goBack">
       <span class="material-symbols-outlined"> close </span>
     </div>
   </app-header>
   <section class="settings">
-    <div class="tw-container">
+    <div class="container">
       <app-search />
 
       <div class="cities">
@@ -55,9 +55,9 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .settings {
-  @apply tw-min-h-screen tw-py-8 tw-bg-slate-200;
+  @apply min-h-screen py-8 bg-slate-200;
 }
 .cities {
-  @apply tw-space-y-2;
+  @apply space-y-2;
 }
 </style>
