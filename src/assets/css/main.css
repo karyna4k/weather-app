@@ -1,0 +1,10 @@
+@import 'tailwind';
+@import 'fonts';
+
+.error {
+  @apply min-h-screen flex justify-center items-center;
+}
+
+.loading {
+  @apply min-h-screen flex justify-center items-center text-xl;
+}
