@@ -12,7 +12,7 @@
 
 <style lang="scss" scoped>
 .header {
-  @apply bg-white;
+  @apply bg-secondary;
 }
 .navigation {
   @apply flex justify-between items-baseline py-5;

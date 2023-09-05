@@ -55,7 +55,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .settings {
-  @apply min-h-screen py-8 bg-slate-200;
+  @apply min-h-screen py-8;
 }
 .cities {
   @apply space-y-2;

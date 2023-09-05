@@ -1,6 +1,6 @@
 <template>
   <app-header>
-    <router-link :to="{ name: 'settings' }" class="text-lg font-bold">Weather App</router-link>
+    <router-link :to="{ name: 'settings' }" class="text-2xl font-bold">Forecast</router-link>
     <router-link :to="{ name: 'settings' }">
       <span class="material-symbols-outlined"> settings </span>
     </router-link>
@@ -35,6 +35,6 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .weather {
-  @apply min-h-screen py-8 bg-slate-200;
+  @apply min-h-screen py-8;
 }
 </style>
