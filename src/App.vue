@@ -1,5 +1,5 @@
 <template>
-  <div class="weather">
+  <div class="widget">
     <router-view />
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script lang="ts" setup></script>
 
 <style lang="scss" scoped>
-.weather {
-  @apply flex flex-col font-Montserrat bg-white;
+.widget {
+  @apply flex flex-col bg-white;
 }
 </style>
