@@ -3,7 +3,6 @@ import { createApp, defineCustomElement, getCurrentInstance, h } from 'vue';
 
 export const createElementInstance = ({
   component = null,
-  props = [],
   sharedStoreInstance = false,
   plugins = [],
   externalStyles = []
@@ -11,7 +10,6 @@ export const createElementInstance = ({
   return defineCustomElement({
     name: 'Weather Widget',
     styles: externalStyles,
-    props: props,
     setup() {
       const app = createApp();
 

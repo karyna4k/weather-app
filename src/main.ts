@@ -14,7 +14,6 @@ const pinia = createPinia();
 
 const config = {
   component: App,
-  props: { title: String },
   sharedStoreInstance: true,
   plugins: [pinia, router],
   externalStyles: [tailwind]
