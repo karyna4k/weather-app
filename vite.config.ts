@@ -4,14 +4,19 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-  plugins: [vue()],
-  define: {
-    'process.env': {}
-  },
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.includes('weather-widget')
+        }
+      }
+    })
+  ],
   build: {
     lib: {
       entry: 'src/main.ts',
-      name: 'WeatherWidget',
+      name: 'weather-widget',
       fileName: 'app'
     },
     rollupOptions: {
@@ -27,6 +32,9 @@ export default defineConfig({
         }
       }
     }
+  },
+  define: {
+    'process.env': process.env
   },
   resolve: {
     alias: {
