@@ -3,17 +3,15 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
-import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
-
 export default defineConfig({
-  plugins: [vue(), cssInjectedByJsPlugin()],
+  plugins: [vue()],
   build: {
     cssCodeSplit: false,
     target: 'esnext',
     lib: {
-      entry: '/src/main.ts',
+      entry: 'src/main.ts',
       name: 'WeatherWidget',
-      fileName: (format) => `weather-widget.${format}.js`
+      formats: ['es']
     },
     rollupOptions: {
       external: ['vue'],

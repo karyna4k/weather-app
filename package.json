@@ -1,34 +1,28 @@
 {
   "name": "weather-widget",
-  "version": "0.0.0",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/weather-widget.umd.js",
-  "module": "./dist/weather-widget.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/weather-widget.es.js",
-      "require": "./dist/weather-widget.umd.js"
-    },
-    "./style.css": "./dist/style.css"
-  },
-  "types": "./dist/types/index.d.ts",
+  "version": "1.0.0",
+  "description": "A weather widget built with Vue 3 and Vite.",
+  "main": "dist/weather-widget.es.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly && mv dist/src dist/types",
-    "preserve": "vite build",
-    "serve": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit",
-    "preview": "vite preview",
-    "test": "exit 0"
+    "build": "vite build",
+    "preview": "vite preview"
   },
+  "keywords": [
+    "weather",
+    "widget",
+    "vue",
+    "vite",
+    "web-component"
+  ],
+  "author": "karyna4k",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.4.0",
     "pinia": "^2.1.6",
     "uid": "^2.0.2",
     "vue": "^3.3.4",
+    "vue-draggable-next": "^2.2.1",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
@@ -49,7 +43,6 @@
     "tailwindcss": "^3.3.3",
     "typescript": "~5.1.6",
     "vite": "^4.4.6",
-    "vite-plugin-css-injected-by-js": "^3.3.0",
     "vue-tsc": "^1.8.6"
   }
 }
