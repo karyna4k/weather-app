@@ -1,5 +1,8 @@
 <template>
-  <div id="widget" class="flex flex-col bg-primary">
+  <div
+    id="widget"
+    class="flex flex-col bg-primary"
+  >
     <router-view />
   </div>
 </template>
