@@ -9,7 +9,7 @@ export default defineConfig({
     lib: {
       entry: 'src/main.ts',
       name: 'WeatherWidget',
-      fileName: (format) => `weather-widget.${format}.js`
+      fileName: 'weather-widget'
     },
     rollupOptions: {
       external: ['vue', 'vue-router', 'pinia', 'axios', 'uid', 'vue-draggable-next'],
