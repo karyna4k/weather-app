@@ -1,15 +1,33 @@
 <template>
   <app-header>
-    <router-link :to="{ name: 'settings' }" class="text-2xl font-bold">Forecast</router-link>
+    <router-link
+      :to="{ name: 'settings' }"
+      class="text-2xl font-bold"
+    >
+      Forecast
+    </router-link>
     <router-link :to="{ name: 'settings' }">
       <span class="material-symbols-outlined"> settings </span>
     </router-link>
   </app-header>
-  <section class="weather">
+  <section class="min-h-screen py-8">
     <div class="container">
-      <div v-if="store.loading" class="loading">Loading...</div>
-      <div v-if="store.error" class="error">{{ store.error }}</div>
-      <city-weather v-if="store.weather" :weather="store.weather" />
+      <div
+        v-if="store.loading"
+        class="loading"
+      >
+        Loading...
+      </div>
+      <div
+        v-if="store.error"
+        class="error"
+      >
+        {{ store.error }}
+      </div>
+      <weather-info
+        v-if="store.weather"
+        :weather="store.weather"
+      />
     </div>
   </section>
 </template>
@@ -20,7 +38,7 @@ import { useRoute } from 'vue-router';
 import { useWeatherStore } from '@/stores/weather';
 
 const AppHeader = defineAsyncComponent(() => import('@/components/AppHeader.vue'));
-const CityWeather = defineAsyncComponent(() => import('@/components/CityWeather.vue'));
+const WeatherInfo = defineAsyncComponent(() => import('@/components/weather/WeatherInfo.vue'));
 
 const route = useRoute();
 
@@ -29,14 +47,6 @@ const store = useWeatherStore();
 onMounted(async () => {
   const { lat, lon } = route.query;
 
-  if (typeof lat === 'number' && typeof lon === 'number') {
-    store.fetchWeather(lat, lon);
-  }
+  store.fetchWeather(lat, lon);
 });
 </script>
-
-<style lang="scss" scoped>
-.weather {
-  @apply min-h-screen py-8;
-}
-</style>

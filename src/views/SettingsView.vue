@@ -1,17 +1,30 @@
 <template>
   <app-header>
     <span class="font-lg font-semibold">Settings</span>
-    <div class="cursor-pointer" @click="goBack">
+    <div
+      class="cursor-pointer"
+      @click="goBack"
+    >
       <span class="material-symbols-outlined"> close </span>
     </div>
   </app-header>
-  <section class="settings">
+  <section class="min-h-screen py-8">
     <div class="container">
       <app-search />
 
-      <div class="cities">
-        <div v-if="store.loading" class="loading">Loading...</div>
-        <div v-if="store.error" class="error">{{ store.error }}</div>
+      <div class="space-y-2">
+        <div
+          v-if="store.loading"
+          class="loading"
+        >
+          Loading...
+        </div>
+        <div
+          v-if="store.error"
+          class="error"
+        >
+          {{ store.error }}
+        </div>
         <template v-if="store.cities">
           <city-card
             v-for="city in store.cities"
@@ -53,11 +66,3 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-.settings {
-  @apply min-h-screen py-8;
-}
-.cities {
-  @apply space-y-2;
-}
-</style>

@@ -1,13 +1,11 @@
 <template>
-  <div class="weather">
+  <div id="widget" class="flex flex-col bg-primary">
     <router-view />
   </div>
 </template>
 
-<script lang="ts" setup></script>
-
-<style lang="scss">
+<!-- <style lang="scss">
 .widget {
   @apply flex flex-col bg-primary text-dark;
 }
-</style>
+</style> -->

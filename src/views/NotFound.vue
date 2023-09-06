@@ -1,26 +1,19 @@
 <template>
-  <div class="not-found">
+  <div class="flex items-center min-h-screen py-8 bg-primary">
     <div class="container space-y-4">
-      <h1 class="title">Not Found</h1>
-      <div class="descr">
+      <h1 class="text-3xl sm:text-6xl font-bold">
+        Not Found
+      </h1>
+      <div class="text-xl">
         Ooops, we couldn't find that page. Try going to
-        <router-link class="link" :to="{ name: 'settings' }">home page</router-link>.
+        <router-link
+          class="ont-semibold text-gray-800"
+          :to="{ name: 'settings' }"
+        >
+          home page
+        </router-link>.
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.not-found {
-  @apply flex items-center min-h-screen py-8 bg-slate-200;
-}
-.title {
-  @apply text-3xl sm:text-6xl font-bold;
-}
-.descr {
-  @apply text-xl;
-}
-.link {
-  @apply font-semibold text-gray-800;
-}
-</style>

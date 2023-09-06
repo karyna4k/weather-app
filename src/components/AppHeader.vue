@@ -1,20 +1,9 @@
 <template>
-  <header class="header">
+  <header class="bg-secondary">
     <div class="container">
-      <div class="navigation">
+      <div class="flex justify-between items-baseline py-5">
         <slot />
       </div>
     </div>
   </header>
 </template>
-
-<script setup lang="ts"></script>
-
-<style lang="scss" scoped>
-.header {
-  @apply bg-secondary;
-}
-.navigation {
-  @apply flex justify-between items-baseline py-5;
-}
-</style>

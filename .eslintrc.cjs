@@ -7,7 +7,8 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier/skip-formatting'
+    '@vue/eslint-config-prettier/skip-formatting',
+    'plugin:vue/vue3-recommended'
   ],
   parserOptions: {
     ecmaVersion: 'latest'
@@ -15,25 +16,5 @@ module.exports = {
   env: {
     node: true
   },
-  rules: {
-    'vue/attributes-order': [
-      'error',
-      {
-        order: [
-          'DEFINITION',
-          'LIST_RENDERING',
-          'CONDITIONALS',
-          'RENDER_MODIFIERS',
-          'GLOBAL',
-          ['UNIQUE', 'SLOT'],
-          'TWO_WAY_BINDING',
-          'OTHER_DIRECTIVES',
-          'OTHER_ATTR',
-          'EVENTS',
-          'CONTENT'
-        ],
-        alphabetical: false
-      }
-    ]
-  }
+  rules: {}
 };

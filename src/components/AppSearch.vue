@@ -1,23 +1,35 @@
 <template>
-  <div class="search">
-    <div class="search-block">
-      <label for="search" class="search-label">Add location</label>
+  <div class="space-y-4 mb-8">
+    <div class="flex flex-col gap-2">
+      <label
+        for="search"
+        class="flex-1 font-medium ml-3"
+      >Add location</label>
       <input
         id="search"
         v-model="searchQuery"
         type="text"
         name="search"
         placeholder="Search for a city"
-        class="search-field"
+        class="py-4 px-6 rounded-2xl focus:border-gray-800 focus:outline-none focus:shadow-lg"
         @input="getSearchResults"
-      />
+      >
     </div>
-    <div class="results">
-      <ul v-if="searchResults && searchQuery.length !== 0" class="results-list">
-        <p v-if="searchError" class="results-error">
+    <div>
+      <ul
+        v-if="searchResults && searchQuery.length !== 0"
+        class="w-full divide-y-2 rounded-2xl"
+      >
+        <p
+          v-if="searchError"
+          class="py-4 px-6 text-center"
+        >
           Sorry, something went wrong. Please, try again.
         </p>
-        <p v-else-if="!searchError && searchResults.length === 0" class="results-empty">
+        <p
+          v-else-if="!searchError && searchResults.length === 0"
+          class="py-4 px-6 text-center"
+        >
           No results match your query. Try a different term.
         </p>
         <template v-else>
@@ -101,19 +113,7 @@ const addCity = (cityResult: GeocodedCity) => {
 };
 </script>
 
-<style lang="scss" scoped>
-.search {
-  @apply space-y-4 mb-8;
-  &-block {
-    @apply flex flex-col gap-2;
-  }
-  &-label {
-    @apply flex-1 font-medium ml-3;
-  }
-  &-field {
-    @apply py-4 px-6 rounded-2xl focus:border-gray-800 focus:outline-none focus:shadow-lg;
-  }
-}
+<style lang="scss">
 .results {
   &-list {
     @apply w-full divide-y-2 rounded-2xl;
@@ -129,10 +129,6 @@ const addCity = (cityResult: GeocodedCity) => {
     &.disabled {
       @apply pointer-events-none bg-white/20;
     }
-  }
-  &-error,
-  &-empty {
-    @apply py-4 px-6 text-center;
   }
 }
 </style>
