@@ -6,12 +6,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/weather-widget.umd.cjs",
-  "module": "./dist/weather-widget.js",
+  "main": "./dist/weather-widget.umd.js",
+  "module": "./dist/weather-widget.es.js",
   "exports": {
     ".": {
-      "import": "./dist/weather-widget.js",
-      "require": "./dist/weather-widget.umd.cjs"
+      "import": "./dist/weather-widget.es.js",
+      "require": "./dist/weather-widget.umd.js"
     },
     "./style.css": "./dist/style.css"
   },
