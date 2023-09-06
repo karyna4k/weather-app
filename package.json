@@ -4,12 +4,12 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/weather-widget.umd.cjs",
-  "module": "./dist/weather-widget.js",
+  "main": "./dist/app.umd.cjs",
+  "module": "./dist/app.js",
   "exports": {
     ".": {
-      "import": "./dist/weather-widget.js",
-      "require": "./dist/weather-widget.umd.cjs"
+      "import": "./dist/app.js",
+      "require": "./dist/app.cjs"
     }
   },
   "version": "1.0.0",
