@@ -6,7 +6,7 @@ console.log(App.style);
 
 import './assets/css/main.css';
 import './assets/scss/main.scss';
-import tailwind from './assets/css/tailwind.css';
+import tailwind from './assets/css/tailwind.css?inline';
 
 import { createElementInstance } from './createElement';
 

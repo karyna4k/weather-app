@@ -9,7 +9,7 @@
   "exports": {
     ".": {
       "import": "./dist/app.js",
-      "require": "./dist/app.cjs"
+      "require": "./dist/app.umd.cjs"
     }
   },
   "version": "1.0.0",
