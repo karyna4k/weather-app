@@ -3,9 +3,7 @@ import { createPinia } from 'pinia';
 import App from './App.vue';
 import router from './router';
 
-import './assets/css/main.css';
-import './assets/scss/main.scss';
-// import tailwind from './assets/css/tailwind.css?inline';
+import '@/assets/css/main.css';
 
 const pinia = createPinia();
 const app = createApp(App);

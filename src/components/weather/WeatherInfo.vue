@@ -37,11 +37,9 @@ import { useWeatherStore } from '@/stores/weather';
 
 const WeatherCard = defineAsyncComponent(() => import('@/components/weather/WeatherCard.vue'))
 
-type PropTypes = {
+const props = defineProps<{
   weather: Weather
-}
-
-const props = defineProps<PropTypes>();
+}>();
 
 const { getWindDirection } = storeToRefs(useWeatherStore());
 

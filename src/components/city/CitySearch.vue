@@ -1,9 +1,9 @@
 <template>
-  <div class="search">
-    <div class="search-wrapper">
+  <div class="search space-y-4 mb-8">
+    <div class="flex flex-col gap-2">
       <label
         for="search"
-        class="search-label"
+        class="flex-1 font-medium ml-3 text-lg"
       >Add location</label>
       <input
         id="search"
@@ -11,7 +11,7 @@
         type="text"
         name="search"
         placeholder="Search for a city"
-        class="search-input"
+        class="search-input py-4 px-6 rounded-2xl focus:outline-none focus:shadow-md"
         @input="getSearchResults"
       >
     </div>
@@ -36,7 +36,7 @@
           <li
             v-for="result in isDisabled"
             :key="`${result.name},${result.country}`"
-            class="results-item"
+            class="results-item py-3 px-6 cursor-pointer hover:font-semibold"
             :class="{ disabled: result.disabled }"
             :disabled="result.disabled"
             @click="addCity(result)"
@@ -113,37 +113,3 @@ const addCity = (cityResult: GeocodedCity) => {
   searchQuery.value = '';
 };
 </script>
-
-<style lang="scss">
-@use '@/assets/scss/utils/variables';
-.search {
-  @apply space-y-4 mb-8;
-  &-wrapper {
-    @apply flex flex-col gap-2;
-  }
-  &-label {
-    @apply flex-1 font-medium ml-3 text-lg;
-  }
-  &-input {
-    @apply py-4 px-6 rounded-2xl focus:outline-none focus:shadow-md;
-    border: variables.$b-purple-3;
-  }
-}
-.results {
-  &-list {
-    @apply w-full divide-y-2 rounded-2xl;
-  }
-  &-item {
-    @apply py-3 px-6 cursor-pointer  hover:font-semibold;
-    &:first-child {
-      @apply rounded-t-2xl;
-    }
-    &:last-child {
-      @apply rounded-b-2xl;
-    }
-    &.disabled {
-      @apply pointer-events-none;
-    }
-  }
-}
-</style>

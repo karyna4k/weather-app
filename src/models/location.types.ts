@@ -3,7 +3,7 @@ export interface Coordinates {
   lon: number;
 }
 
-export type City = {
+export interface City {
   id: string;
   city: string;
   country: string;

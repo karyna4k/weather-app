@@ -1,5 +1,18 @@
-@import 'tailwind';
 @import 'fonts';
+@import 'tailwind';
+
+html {
+  font-size: 16px;
+}
+
+* {
+  font-family: Montserrat, sans-serif;
+}
+
+span {
+  font-weight: inherit;
+  font-family: inherit;
+}
 
 .error {
   @apply min-h-screen flex justify-center items-center;

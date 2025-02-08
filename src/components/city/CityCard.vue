@@ -1,6 +1,6 @@
 <template>
-  <li class="card">
-    <h3 class="card-title">
+  <li class="card flex items-baseline gap-3 px-6 py-4 cursor-pointer rounded-3xl bg-purple-light font-semibold">
+    <h3 class="flex-1">
       {{ `${city.city}, ${city.country}` }}
     </h3>
     <button
@@ -16,24 +16,9 @@
 import type { City } from '@/models';
 import { useCitiesStore } from '@/stores/cities';
 
-type PropTypes = {
-  city: City;
-};
-
 const { deleteCity } = useCitiesStore();
 
-defineProps<PropTypes>();
+defineProps<{
+  city: City
+}>();
 </script>
-
-<style lang="scss" scoped>
-@use '@/assets/scss/utils/variables';
-.card {
-  @apply flex items-baseline gap-3 px-6 py-4 cursor-pointer rounded-3xl bg-purple-light font-semibold;
-  border: variables.$b-purple-3;
-
-  &-title {
-    @apply flex-1;
-  }
-}
-</style>
-
