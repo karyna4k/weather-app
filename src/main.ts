@@ -1,22 +1,26 @@
+import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import App from './App.ce.vue';
+import App from './App.vue';
 import router from './router';
-
-console.log(App.style);
 
 import './assets/css/main.css';
 import './assets/scss/main.scss';
-import tailwind from './assets/css/tailwind.css?inline';
-
-import { createElementInstance } from './createElement';
+// import tailwind from './assets/css/tailwind.css?inline';
 
 const pinia = createPinia();
+const app = createApp(App);
 
-const config = {
-  component: App,
-  sharedStoreInstance: true,
-  plugins: [pinia, router],
-  externalStyles: [tailwind]
-};
+app.use(pinia);
+app.use(router);
 
-customElements.define('weather-widget', createElementInstance(config));
+app.mount('#app');
+
+// import { createElementInstance } from './createElement';
+// const config = {
+//   component: App,
+//   sharedStoreInstance: true,
+//   plugins: [pinia, router],
+//   externalStyles: [tailwind]
+// };
+
+// customElements.define('weather-widget', createElementInstance(config));

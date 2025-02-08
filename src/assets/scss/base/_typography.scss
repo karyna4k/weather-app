@@ -6,5 +6,9 @@ html {
 
 * {
   font-family: Montserrat, sans-serif;
-  color: variables.$dark;
+}
+
+span {
+  font-weight: inherit;
+  font-family: inherit;
 }

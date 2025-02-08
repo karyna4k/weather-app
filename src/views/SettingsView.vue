@@ -1,6 +1,6 @@
 <template>
   <app-header>
-    <span class="font-lg font-semibold">Settings</span>
+    <span class="text-xl font-bold">Settings</span>
     <div
       class="cursor-pointer"
       @click="goBack"
@@ -10,7 +10,7 @@
   </app-header>
   <section class="min-h-screen py-8">
     <div class="container">
-      <app-search />
+      <city-search />
 
       <div class="space-y-2">
         <div
@@ -45,8 +45,8 @@ import { useCitiesStore } from '@/stores/cities';
 import type { Coordinates, Weather } from '@/models';
 
 const AppHeader = defineAsyncComponent(() => import('@/components/AppHeader.vue'));
-const AppSearch = defineAsyncComponent(() => import('@/components/AppSearch.vue'));
-const CityCard = defineAsyncComponent(() => import('@/components/CityCard.vue'));
+const CitySearch = defineAsyncComponent(() => import('@/components/city/CitySearch.vue'));
+const CityCard = defineAsyncComponent(() => import('@/components/city/CityCard.vue'));
 
 const store = useCitiesStore();
 

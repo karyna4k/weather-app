@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue';
+import { defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import type { Weather } from '@/models';
 import { useWeatherStore } from '@/stores/weather';

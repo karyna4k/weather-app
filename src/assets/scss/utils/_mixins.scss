@@ -15,6 +15,7 @@
 
 @mixin circle($diameter) {
   @include set-size($diameter);
+
   border-radius: calc(#{$diameter} * 0.5);
 }
 
@@ -36,8 +37,8 @@
 }
 
 @mixin flex-center() {
-  @include flex-x-center();
-  @include flex-y-center();
+  @include flex-x-center;
+  @include flex-y-center;
 }
 
 @mixin my($value) {
@@ -62,6 +63,7 @@
 
 @mixin position-sticky {
   position: fixed;
+
   @supports (position: sticky) {
     position: sticky;
   }
@@ -70,6 +72,7 @@
 @mixin radius($h: $controlHeight) {
   // It's moved into mixin for ability to make ui not rounded all over components
   border-radius: calc(#{$h} * 0.5);
+
   // border-radius: 0.5rem;
 }
 

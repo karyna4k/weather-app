@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center min-h-screen py-8 bg-primary">
+  <div class="flex items-center min-h-screen py-8">
     <div class="container space-y-4">
       <h1 class="text-3xl sm:text-6xl font-bold">
         Not Found

@@ -1,9 +1,9 @@
 <template>
-  <div class="space-y-4 mb-8">
-    <div class="flex flex-col gap-2">
+  <div class="search">
+    <div class="search-wrapper">
       <label
         for="search"
-        class="flex-1 font-medium ml-3"
+        class="search-label"
       >Add location</label>
       <input
         id="search"
@@ -11,7 +11,7 @@
         type="text"
         name="search"
         placeholder="Search for a city"
-        class="py-4 px-6 rounded-2xl focus:border-gray-800 focus:outline-none focus:shadow-lg"
+        class="search-input"
         @input="getSearchResults"
       >
     </div>
@@ -61,12 +61,12 @@ const store = useCitiesStore();
 const key = import.meta.env.VITE_WEATHER_KEY;
 
 const searchQuery = ref('');
-const queryTimeout = ref<NodeJS.Timeout | null>(null);
+const queryTimeout = ref(null);
 const searchResults = ref<GeocodedCity[] | null>(null);
 const searchError = ref<boolean | null>(null);
 
 const isDisabled = computed(() => {
-  return searchResults.value?.map((result: GeocodedCity) => {
+  return searchResults.value.map((result: GeocodedCity) => {
     if (
       store.cities.some(
         (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon
@@ -79,6 +79,8 @@ const isDisabled = computed(() => {
 });
 
 const getSearchResults = (): void => {
+  clearTimeout(queryTimeout.value);
+
   queryTimeout.value = setTimeout(async (): Promise<void> => {
     if (searchQuery.value !== '') {
       try {
@@ -95,7 +97,6 @@ const getSearchResults = (): void => {
     searchResults.value = null;
   }, 500);
 
-  clearTimeout(queryTimeout.value);
 };
 
 const addCity = (cityResult: GeocodedCity) => {
@@ -114,12 +115,26 @@ const addCity = (cityResult: GeocodedCity) => {
 </script>
 
 <style lang="scss">
+@use '@/assets/scss/utils/variables';
+.search {
+  @apply space-y-4 mb-8;
+  &-wrapper {
+    @apply flex flex-col gap-2;
+  }
+  &-label {
+    @apply flex-1 font-medium ml-3 text-lg;
+  }
+  &-input {
+    @apply py-4 px-6 rounded-2xl focus:outline-none focus:shadow-md;
+    border: variables.$b-purple-3;
+  }
+}
 .results {
   &-list {
     @apply w-full divide-y-2 rounded-2xl;
   }
   &-item {
-    @apply py-3 px-6 cursor-pointer bg-slate-100 hover:font-semibold;
+    @apply py-3 px-6 cursor-pointer  hover:font-semibold;
     &:first-child {
       @apply rounded-t-2xl;
     }
@@ -127,7 +142,7 @@ const addCity = (cityResult: GeocodedCity) => {
       @apply rounded-b-2xl;
     }
     &.disabled {
-      @apply pointer-events-none bg-white/20;
+      @apply pointer-events-none;
     }
   }
 }

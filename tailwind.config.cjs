@@ -14,11 +14,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        dark: '#094067',
-        primary: '#fffffe',
-        secondary: '#90b4ce',
-        'accent-blue': '#3da9fc',
-        'accent-red': '#ef4565'
+        'savoy-blue': '#656da4',
+        'lavender-web': '#d9dbf1ff',
+        ivory: '#f9f9edff',
+        mindaro: '#B4E949',
+        'purple-light': '#f2ebff',
+        'purple-base': '#e0d1ef',
+        'purple-dark': '#cec2ff'
       },
       gridTemplateColumns: {
         card: 'repeat(auto-fill, minmax(14rem, 1fr))',
