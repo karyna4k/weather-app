@@ -65,18 +65,16 @@ const queryTimeout = ref(null);
 const searchResults = ref<GeocodedCity[] | null>(null);
 const searchError = ref<boolean | null>(null);
 
-const isDisabled = computed(() => {
-  return searchResults.value.map((result: GeocodedCity) => {
-    if (
-      store.cities.some(
-        (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon
-      )
-    ) {
-      return { ...result, disabled: true };
-    }
-    return { ...result, disabled: false };
-  });
-});
+const isDisabled = computed(() => searchResults.value.map((result: GeocodedCity) => {
+  if (
+    store.cities.some(
+      (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon,
+    )
+  ) {
+    return { ...result, disabled: true };
+  }
+  return { ...result, disabled: false };
+}));
 
 const getSearchResults = (): void => {
   clearTimeout(queryTimeout.value);
@@ -85,7 +83,7 @@ const getSearchResults = (): void => {
     if (searchQuery.value !== '') {
       try {
         const result = await axios.get(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${key}`
+          `http://api.openweathermap.org/geo/1.0/direct?q=${searchQuery.value}&limit=5&appid=${key}`,
         );
         searchResults.value = result.data;
       } catch {
@@ -96,7 +94,6 @@ const getSearchResults = (): void => {
     }
     searchResults.value = null;
   }, 500);
-
 };
 
 const addCity = (cityResult: GeocodedCity) => {
@@ -106,8 +103,8 @@ const addCity = (cityResult: GeocodedCity) => {
     country: cityResult.country,
     coords: {
       lat: cityResult.lat,
-      lon: cityResult.lon
-    }
+      lon: cityResult.lon,
+    },
   };
   store.addCity(newCity);
   searchQuery.value = '';

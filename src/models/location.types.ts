@@ -8,7 +8,7 @@ export interface City {
   city: string;
   country: string;
   coords: Coordinates;
-};
+}
 
 export interface GeocodedCity {
   name: string;

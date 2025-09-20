@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-const loadComponent = (view: string) => {
-  return () => import(`@/views/${view}.vue`);
-};
+const loadComponent = (view: string) => () => import(`@/views/${view}.vue`);
 
 const router = createRouter({
   history: createWebHistory(),
@@ -12,8 +10,8 @@ const router = createRouter({
       name: 'settings',
       component: loadComponent('SettingsView'),
       meta: {
-        title: 'Home'
-      }
+        title: 'Home',
+      },
     },
 
     {
@@ -21,15 +19,15 @@ const router = createRouter({
       name: 'weather',
       component: loadComponent('WeatherView'),
       meta: {
-        title: 'Weather'
-      }
+        title: 'Weather',
+      },
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
-      component: loadComponent('NotFound')
-    }
-  ]
+      component: loadComponent('NotFound'),
+    },
+  ],
 });
 
 router.beforeEach((to, from, next) => {

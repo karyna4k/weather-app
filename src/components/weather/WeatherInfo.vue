@@ -35,7 +35,7 @@ import { storeToRefs } from 'pinia';
 import type { Weather } from '@/models';
 import { useWeatherStore } from '@/stores/weather';
 
-const WeatherCard = defineAsyncComponent(() => import('@/components/weather/WeatherCard.vue'))
+const WeatherCard = defineAsyncComponent(() => import('@/components/weather/WeatherCard.vue'));
 
 const props = defineProps<{
   weather: Weather
@@ -48,32 +48,32 @@ const cards = [
   {
     title: 'feels like',
     iconName: 'thermostat',
-    info: `${Math.round(props.weather.main.feels_like)}&deg;`
+    info: `${Math.round(props.weather.main.feels_like)}&deg;`,
   },
   {
     title: 'wind',
     iconName: 'air',
-    info: `${getWindDirection.value} ${props.weather.wind.speed.toFixed(1)} m/s`
+    info: `${getWindDirection.value} ${props.weather.wind.speed.toFixed(1)} m/s`,
   },
   {
     title: 'pressure',
     iconName: 'compress',
-    info: `${props.weather.main.pressure} hPa`
+    info: `${props.weather.main.pressure} hPa`,
   },
   {
     title: 'humidity',
     iconName: 'humidity_percentage',
-    info: `${props.weather.main.humidity}%`
+    info: `${props.weather.main.humidity}%`,
   },
   {
     title: 'cloudiness',
     iconName: 'cloud',
-    info: `${props.weather.clouds.all}%`
+    info: `${props.weather.clouds.all}%`,
   },
   {
     title: 'visibility',
     iconName: 'visibility',
-    info: `${(props.weather.visibility / 1000).toFixed(1)} km`
+    info: `${(props.weather.visibility / 1000).toFixed(1)} km`,
   },
-]
+];
 </script>

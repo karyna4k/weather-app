@@ -9,8 +9,8 @@ module.exports = {
         sm: '2rem',
         lg: '4rem',
         xl: '5rem',
-        '2xl': '6rem'
-      }
+        '2xl': '6rem',
+      },
     },
     extend: {
       colors: {
@@ -20,13 +20,13 @@ module.exports = {
         mindaro: '#B4E949',
         'purple-light': '#f2ebff',
         'purple-base': '#e0d1ef',
-        'purple-dark': '#cec2ff'
+        'purple-dark': '#cec2ff',
       },
       gridTemplateColumns: {
         card: 'repeat(auto-fill, minmax(14rem, 1fr))',
-        'card-mobile': 'repeat(auto-fill, minmax(12rem, 1fr))'
-      }
-    }
+        'card-mobile': 'repeat(auto-fill, minmax(12rem, 1fr))',
+      },
+    },
   },
-  plugins: []
+  plugins: [],
 };

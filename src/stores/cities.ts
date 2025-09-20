@@ -35,7 +35,7 @@ export const useCitiesStore = defineStore('cities', () => {
 
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/geo/1.0/reverse?lat=${coords.lat}&lon=${coords.lon}&limit=5&appid=${apiKey}`
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${coords.lat}&lon=${coords.lon}&limit=5&appid=${apiKey}`,
       );
       const city = await response.data[0];
       cities.value.push({
@@ -44,8 +44,8 @@ export const useCitiesStore = defineStore('cities', () => {
         country: city.country,
         coords: {
           lat: city.lat,
-          lon: city.lon
-        }
+          lon: city.lon,
+        },
       });
       localStorage.setItem('cities', JSON.stringify(cities.value));
     } catch (e) {
@@ -61,6 +61,6 @@ export const useCitiesStore = defineStore('cities', () => {
     error,
     getCities,
     addCity,
-    deleteCity
+    deleteCity,
   };
 });

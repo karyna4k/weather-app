@@ -65,4 +65,3 @@ onMounted(() => {
   store.getCities();
 });
 </script>
-

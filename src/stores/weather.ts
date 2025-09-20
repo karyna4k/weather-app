@@ -15,7 +15,7 @@ export const useWeatherStore = defineStore('weather', () => {
     return weather.value
       ? directions[Math.round(weather.value?.wind.deg / 45) % 8]
       : // TODO: return null or something that
-        directions[0];
+      directions[0];
   });
 
   const fetchWeather = async (lat: LocationQueryValue, lon: LocationQueryValue) => {
@@ -24,7 +24,7 @@ export const useWeatherStore = defineStore('weather', () => {
 
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`,
       );
       weather.value = await response.data;
       localStorage.setItem('weather', JSON.stringify(weather.value));
@@ -40,6 +40,6 @@ export const useWeatherStore = defineStore('weather', () => {
     fetchWeather,
     loading,
     error,
-    getWindDirection
+    getWindDirection,
   };
 });

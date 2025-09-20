@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
   plugins: [
-    vue()
+    vue(),
     //   {
     //   template: {
     //     compilerOptions: {
@@ -35,11 +35,11 @@ export default defineConfig({
     // }
   },
   define: {
-    'process.env': process.env
+    'process.env': process.env,
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
 });
