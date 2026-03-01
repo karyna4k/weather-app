@@ -61,11 +61,11 @@ const store = useCitiesStore();
 const key = import.meta.env.VITE_WEATHER_KEY;
 
 const searchQuery = ref('');
-const queryTimeout = ref(null);
+const queryTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 const searchResults = ref<GeocodedCity[] | null>(null);
 const searchError = ref<boolean | null>(null);
 
-const isDisabled = computed(() => searchResults.value.map((result: GeocodedCity) => {
+const isDisabled = computed(() => (searchResults.value ?? []).map((result: GeocodedCity) => {
   if (
     store.cities.some(
       (city: City) => result.lat === city.coords.lat && result.lon === city.coords.lon,
@@ -77,7 +77,7 @@ const isDisabled = computed(() => searchResults.value.map((result: GeocodedCity)
 }));
 
 const getSearchResults = (): void => {
-  clearTimeout(queryTimeout.value);
+  if (queryTimeout.value != null) clearTimeout(queryTimeout.value);
 
   queryTimeout.value = setTimeout(async (): Promise<void> => {
     if (searchQuery.value !== '') {

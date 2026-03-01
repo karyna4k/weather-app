@@ -53,8 +53,17 @@ const store = useCitiesStore();
 const router = useRouter();
 
 const goBack = () => {
-  const weather: Weather = JSON.parse(localStorage.getItem('weather') ?? '');
-  router.push({ name: 'weather', query: { lat: weather.coord.lat, lon: weather.coord.lon } });
+  const raw = localStorage.getItem('weather');
+  if (!raw || raw.trim() === '') {
+    router.push({ name: 'weather' });
+    return;
+  }
+  try {
+    const weather: Weather = JSON.parse(raw);
+    router.push({ name: 'weather', query: { lat: String(weather.coord.lat), lon: String(weather.coord.lon) } });
+  } catch {
+    router.push({ name: 'weather' });
+  }
 };
 
 const goToWeather = (coords: Coordinates) => {

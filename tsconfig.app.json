@@ -15,6 +15,6 @@
     },
     "importsNotUsedAsValues": "remove",
     "preserveValueImports": false,
-    "types": ["node", "vitest/globals"]
+    "types": ["node"]
   }
 }

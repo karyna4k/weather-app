@@ -45,8 +45,10 @@ const route = useRoute();
 const store = useWeatherStore();
 
 onMounted(async () => {
-  const { lat, lon } = route.query;
-
-  store.fetchWeather(lat, lon);
+  const lat = route.query.lat;
+  const lon = route.query.lon;
+  const latVal = lat == null ? undefined : Array.isArray(lat) ? lat[0] : lat;
+  const lonVal = lon == null ? undefined : Array.isArray(lon) ? lon[0] : lon;
+  store.fetchWeather(latVal, lonVal);
 });
 </script>
