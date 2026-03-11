@@ -8,26 +8,7 @@ import { useGeolocation } from '@/composables';
 export const useCitiesStore = defineStore('cities', () => {
   const cities = ref<City[]>([]);
   const loading = ref(false);
-  const error = ref(null);
-
-  // init list of cities
-  const getCities = () => {
-    localStorage.getItem('cities')
-      ? (cities.value = JSON.parse(localStorage.getItem('cities') ?? ''))
-      : useGeolocation(fetchCity);
-  };
-
-  // add city to the list
-  const addCity = (city: City) => {
-    cities.value.push(city);
-    localStorage.setItem('cities', JSON.stringify(cities.value));
-  };
-
-  // remove city from the list
-  const deleteCity = (id: string) => {
-    cities.value = cities.value.filter((city: City) => city.id !== id);
-    localStorage.setItem('cities', JSON.stringify(cities.value));
-  };
+  const error = ref<string | null>(null);
 
   const fetchCity = async (coords: Coordinates) => {
     const apiKey = import.meta.env.VITE_WEATHER_KEY;
@@ -49,10 +30,34 @@ export const useCitiesStore = defineStore('cities', () => {
       });
       localStorage.setItem('cities', JSON.stringify(cities.value));
     } catch (e) {
-      console.log(e);
+      error.value = e instanceof Error ? e.message : 'Failed to fetch city.';
     } finally {
       loading.value = false;
     }
+  };
+
+  // init list of cities
+  const getCities = () => {
+    const stored = localStorage.getItem('cities');
+    if (stored) {
+      cities.value = JSON.parse(stored);
+      return;
+    }
+
+    const geoError = useGeolocation(fetchCity);
+    if (geoError) error.value = geoError.message;
+  };
+
+  // add city to the list
+  const addCity = (city: City) => {
+    cities.value.push(city);
+    localStorage.setItem('cities', JSON.stringify(cities.value));
+  };
+
+  // remove city from the list
+  const deleteCity = (id: string) => {
+    cities.value = cities.value.filter((city: City) => city.id !== id);
+    localStorage.setItem('cities', JSON.stringify(cities.value));
   };
 
   return {

@@ -21,9 +21,11 @@ export const createElementInstance = ({
 
     const inst = getCurrentInstance();
     if (inst) {
+      // eslint-disable-next-line no-underscore-dangle
       Object.assign(inst.appContext, app._context);
       Object.assign(
         (inst as unknown as { provides: Record<symbol, unknown> }).provides,
+        // eslint-disable-next-line no-underscore-dangle
         (app._context as { provides: Record<symbol, unknown> }).provides,
       );
     }

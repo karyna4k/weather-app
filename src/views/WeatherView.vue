@@ -44,11 +44,18 @@ const route = useRoute();
 
 const store = useWeatherStore();
 
+const getQueryValue = (value: unknown): string | undefined => {
+  if (value == null) return undefined;
+  if (Array.isArray(value)) return value[0];
+  if (typeof value === 'string') return value;
+  return undefined;
+};
+
 onMounted(async () => {
-  const lat = route.query.lat;
-  const lon = route.query.lon;
-  const latVal = lat == null ? undefined : Array.isArray(lat) ? lat[0] : lat;
-  const lonVal = lon == null ? undefined : Array.isArray(lon) ? lon[0] : lon;
+  const { lat } = route.query;
+  const { lon } = route.query;
+  const latVal = getQueryValue(lat);
+  const lonVal = getQueryValue(lon);
   store.fetchWeather(latVal, lonVal);
 });
 </script>

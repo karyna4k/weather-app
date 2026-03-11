@@ -12,7 +12,7 @@ export interface City {
 
 export interface GeocodedCity {
   name: string;
-  local_names: {};
+  local_names: Record<string, string>;
   lat: number;
   lon: number;
   country: string;
