@@ -11,14 +11,14 @@
         type="text"
         name="search"
         placeholder="Search for a city"
-        class="search-input py-4 px-6 rounded-2xl focus:outline-none focus:shadow-md"
+        class="search-input py-4 px-6 rounded-2xl focus:outline-hidden focus:shadow-md"
         @input="getSearchResults"
       >
     </div>
     <div>
       <ul
         v-if="searchResults && searchQuery.length !== 0"
-        class="w-full divide-y-2 rounded-2xl"
+        class="w-full divide-y-2 divide-gray-200 rounded-2xl"
       >
         <p
           v-if="searchError"
