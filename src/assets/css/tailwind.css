@@ -1,3 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-savoy-blue: #656da4;
+  --color-lavender-web: #d9dbf1ff;
+  --color-ivory: #f9f9edff;
+  --color-mindaro: #B4E949;
+  --color-purple-light: #f2ebff;
+  --color-purple-base: #e0d1ef;
+  --color-purple-dark: #cec2ff;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant sm {
+    padding-inline: 2rem;
+  }
+
+  @variant lg {
+    padding-inline: 4rem;
+  }
+
+  @variant xl {
+    padding-inline: 5rem;
+  }
+
+  @variant 2xl {
+    padding-inline: 6rem;
+  }
+}
+
+@utility grid-cols-card {
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+@utility grid-cols-card-mobile {
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
